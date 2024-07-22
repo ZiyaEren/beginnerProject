@@ -1,0 +1,135 @@
+try
+{
+    double bakiye = 10000;
+    double pg, pyat, islem;
+    string cevap, kullaniciAdi = "ziyayilmaz";
+    int sifre = 1234;
+    int hak = 3, dong = 5;
+
+
+
+    Console.WriteLine("******************* ATM ******************* \n");
+
+
+
+    for (int i = 0; i <= dong; i++)
+    {
+        Console.Write("Kullanıcı Adı: ");
+        string kAdi = Console.ReadLine();
+        Console.Write("Şifre: ");
+        int kSifre = int.Parse(Console.ReadLine());
+
+        if (kullaniciAdi == kAdi && sifre == kSifre)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Giriş Başaraılı... \n");
+        x:
+            Console.WriteLine("Lüten Yapmak İstediğiniz İşlemi Seçiniz \n 1-Bakiye Sorgula \n 2-Para Gönder \n 3-Para Yatır \n 4-Şifre Değiştirme \n 5-Çıkış");
+
+            islem = Convert.ToInt32(Console.ReadLine());
+            if (islem == 1)
+            {
+                Console.WriteLine($"Hesap Bakiyeniz: {bakiye}");
+
+                Console.WriteLine("başka bir işlem yapmak istermisiniz?  (evet / hayır)");
+                cevap = Console.ReadLine();
+                if (cevap == "evet")
+                {
+                    goto x;
+                }
+                else
+                {
+                    Console.WriteLine("Çıkış Yapıldı Kartınızı Alabilirsiniz İyi günler dileriz");
+                    break;
+                }
+            }
+            else if (islem == 2)
+            {
+            y:
+                Console.WriteLine("Göndermek istediğiniz para miktarını giriniz");
+                pg = Convert.ToDouble(Console.ReadLine());
+                if (pg > bakiye)
+                {
+                    Console.WriteLine("Hesabınızda Yeterli Bakiye Bulunmamaktadır tekrar deneyiniz");
+                    goto y;
+                }
+                else
+                {
+                    bakiye = bakiye - pg;
+                    Console.WriteLine($"Kalan Bakiyeniz: {bakiye}");
+                }
+                Console.WriteLine("başka bir işlem yapmak istermisiniz?  (evet / hayır)");
+                cevap = Console.ReadLine();
+                if (cevap == "evet")
+                {
+                    goto x;
+                }
+                else
+                {
+                    Console.WriteLine("Çıkış Yapıldı Kartınızı Alabilirsiniz İyi günler dileriz");
+                    break;
+                }
+            }
+            else if (islem == 3)
+            {
+                Console.WriteLine("Yatırmak istediğiniz para miktarını giriniz");
+                pyat = Convert.ToDouble(Console.ReadLine());
+                bakiye = bakiye + pyat;
+                Console.WriteLine($"Güncel Bakiyeniz: {bakiye} ");
+                Console.WriteLine("başka bir işlem yapmak istermisiniz?  (evet / hayır)");
+                cevap = Console.ReadLine();
+                if (cevap == "evet")
+                {
+                    goto x;
+                }
+                else
+                {
+                    Console.WriteLine("Çıkış Yapıldı Kartınızı Alabilirsiniz İyi günler dileriz");
+                    break;
+                }
+            }
+            else if (islem == 4)
+            {
+                c:
+                Console.Write("Mevcut Şifrenizi Giriniz \n");
+                kSifre = int.Parse(Console.ReadLine());
+                if (kSifre == sifre)
+                {
+                    
+                    Console.WriteLine("Yeni Şifrenizi Giriniz \n");
+                    sifre = int.Parse(Console.ReadLine());
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("Mevcut şifreniz yanlış tekrar deneyiniz");
+                    goto c;
+                }
+            }
+            else if (islem == 5)
+            {
+                Console.WriteLine("Çıkış Yapıldı Kartınızı Alabilirsiniz İyi günler dileriz");
+                break;
+
+            }
+            else
+            {
+                Console.WriteLine("Hatalı Bir Tuşlama Yaptınız Yeniden Deneyiniz");
+                goto x;
+            }
+        }
+        else
+        {
+            hak--;
+            Console.WriteLine($"Kullanıcı Adı Veya Şifre Yanlış Lütfen Tekrar Deneyiniz Kalan Deneme Hakkınız: {hak}");
+
+            if (hak == 0)
+            {
+                break;
+            }
+        }
+    }
+}
+catch
+{
+    Console.WriteLine("Hatalı Bir Tuşlama Yaptınız.");
